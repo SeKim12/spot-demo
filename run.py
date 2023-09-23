@@ -7,6 +7,7 @@ import os
 from dataset import training_loader
 from model import GarmentClassifier
 
+# test
 model = GarmentClassifier()
 optimizer = torch.optim.SGD(model.parameters(), lr=1e-5)
 loss_fn = torch.nn.CrossEntropyLoss()
