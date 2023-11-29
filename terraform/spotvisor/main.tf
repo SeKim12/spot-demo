@@ -16,6 +16,5 @@ provider "aws" {
 }
 
 module "aws_spot" {
-  source = "./modules/ec2_spot"
-  resume = var.resume
+  source = "./modules/ec2"
 }

@@ -14,5 +14,9 @@ CONTAINER_ID="$(docker ps --format '{{.ID}}')"
 echo "Detected Spot VM preemption, executing shutdown script..."
 [ -z "$CONTAINER_ID" ] && echo "no running containers" || sudo docker stop $CONTAINER_ID
 
-su seungwoo_simon_kim -c "gsutil -m cp ${CKPT_PATH} ${GCS_PATH}"
-echo "Finished uploading checkpoint to ${GCS_PATH}, exit shutdown script"
+su seungwoo_simon_kim -c "gsutil -m cp $CKPT_PATH $GCS_PATH"
+
+# send signal to spotvisor 
+curl ${api_host}:5000/preempted
+
+echo "Finished uploading checkpoint to $GCS_PATH, exit shutdown script"

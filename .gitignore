@@ -4,6 +4,7 @@ terraform/.credentials/
 
 # Local .terraform directories
 **/.terraform/*
+**/.terraform/
 
 # .tfstate files
 *.tfstate
@@ -36,3 +37,8 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+**/sync_s3.sh
+**/startup.sh
+data/
+.pytest_cache/

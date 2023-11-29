@@ -4,7 +4,7 @@ resource "google_compute_instance" "gce_spot" {
 
   boot_disk {
     initialize_params {
-      image = "ubuntu-os-cloud/ubuntu-2004-lts"
+      image = "ubuntu-os-pro-cloud/ubuntu-pro-1604-lts" # ubuntu-2204-lts"
     }
   }
 
@@ -17,8 +17,13 @@ resource "google_compute_instance" "gce_spot" {
   }
 
   metadata = {
-    startup-script  = file("${path.module}/startup.sh")
-    shutdown-script = file("${path.module}/shutdown.sh")
+    serial-port-logging-enable = "TRUE"
+    startup-script = templatefile("${path.module}/startup.sh", {
+      resume = var.resume
+    })
+    shutdown-script = templatefile("${path.module}/shutdown.sh", {
+      api_host = var.api_host
+    })
   }
 
   scheduling {

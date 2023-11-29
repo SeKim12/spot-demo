@@ -2,6 +2,22 @@
 set -x
 
 PID=0 
+set_flag="$1"
+
+# set_flag="false"
+# while [ $# -gt 0 ]; do
+#     echo $1
+#     echo $2
+#     case $1 in 
+#     --resume) set_flag="$2"
+#     esac
+#     shift
+# done
+
+flag=""
+if [ "$set_flag" = "true" ]; then
+    flag="--resume"
+fi
 
 # Define cleanup procedure
 cleanup() {
@@ -17,7 +33,7 @@ cleanup() {
 trap 'kill ${!}; cleanup' SIGTERM
 
 # replace with actual execution code 
-python run.py &
+python run.py $flag &
 PID=${!}
 
 # runs in the background forever

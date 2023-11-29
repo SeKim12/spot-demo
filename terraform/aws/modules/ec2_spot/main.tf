@@ -4,13 +4,14 @@ data "aws_ami" "linux" {
 
   filter {
     name   = "image-id"
-    values = ["ami-02288bc8778f3166f"]
+    values = ["ami-06d2c6c1b5cbaee5f"]
+    # ["ami-02288bc8778f3166f"]
   }
 }
 
-resource "aws_key_pair" "ssh_key" {
-  key_name   = "ssh_key"
-  public_key = file("~/.ssh/id_rsa.pub")
+resource "aws_key_pair" "ssh_key_inception" {
+  key_name   = "ssh_key_inception"
+  public_key = file("~/.ssh/inception_rsa.pub")
 }
 
 resource "aws_instance" "ec2_spot" {
@@ -22,8 +23,10 @@ resource "aws_instance" "ec2_spot" {
     }
   }
   instance_type = "t3.small"
-  key_name      = aws_key_pair.ssh_key.key_name
-  user_data = file("${path.module}/startup.sh")
+  key_name      = aws_key_pair.ssh_key_inception.key_name
+  user_data     = templatefile("${path.module}/startup.sh", {
+    resume = var.resume
+  })
   tags = {
     Name = "test-spot"
   }

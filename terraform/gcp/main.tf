@@ -2,7 +2,7 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = "4.51.0"
+      version = "4.84.0"
     }
   }
 }
@@ -17,4 +17,5 @@ provider "google" {
 
 module "gce_spot" {
   source = "./modules/gce_spot"
+  api_host = var.api_host
 }

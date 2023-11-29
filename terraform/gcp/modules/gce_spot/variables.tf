@@ -9,3 +9,9 @@ variable "machine_type" {
 variable "service_account" {
   default = "terraform-infra@model-sphere-399315.iam.gserviceaccount.com"
 }
+
+variable "resume" {
+  default = false
+}
+
+variable "api_host" {}

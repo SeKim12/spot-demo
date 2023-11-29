@@ -7,13 +7,15 @@ variable "project" {
 }
 
 variable "region" {
-  default = "asia-northeast3"
+  default = "us-west2"
 }
 
 variable "zone" {
-  default = "asia-northeast3-a"
+  default = "us-west2-b"
 }
 
 variable "gcs_path" {
   default = "gs://mdl-ckpts"
 }
+
+variable "api_host" {}
